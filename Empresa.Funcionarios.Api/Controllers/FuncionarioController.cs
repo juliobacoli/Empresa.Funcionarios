@@ -1,11 +1,13 @@
 ﻿using Empresa.Funcionarios.Application.Services;
 using Empresa.Funcionarios.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Empresa.Funcionarios.Api.Controllers;
 
 [ApiController]
 [Route("api/funcionarios")]
+[Authorize]
 public class FuncionarioController : ControllerBase
 {
     private readonly IFuncionarioService _funcionarioService;
