@@ -7,6 +7,7 @@ function Dashboard() {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [editandoId, setEditandoId] = useState<string | null>(null);
+    const [message, setMessage] = useState(""); // Mensagem de feedback
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -45,17 +46,20 @@ function Dashboard() {
                 await axios.put(`http://localhost:5000/api/funcionarios/${editandoId}`, { nome, email }, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
+                setMessage("Funcionário atualizado com sucesso!");
                 setEditandoId(null);
             } else {
                 await axios.post("http://localhost:5000/api/funcionarios", { nome, email }, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
+                setMessage("Funcionário adicionado com sucesso!");
             }
 
             setNome("");
             setEmail("");
             fetchFuncionarios();
         } catch (error) {
+            setMessage("Erro ao salvar funcionário.");
             console.error("Erro ao salvar funcionário", error);
         }
     };
@@ -73,8 +77,10 @@ function Dashboard() {
             await axios.delete(`http://localhost:5000/api/funcionarios/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
+            setMessage("Funcionário excluído com sucesso!");
             fetchFuncionarios();
         } catch (error) {
+            setMessage("Erro ao excluir funcionário.");
             console.error("Erro ao excluir funcionário", error);
         }
     };
@@ -85,6 +91,8 @@ function Dashboard() {
             <button onClick={handleLogout} style={{ marginBottom: "10px", cursor: "pointer" }}>
                 Logout
             </button>
+
+            {message && <p>{message}</p>}
 
             <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
                 <input
