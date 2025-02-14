@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Empresa.Funcionarios.Data\Empresa.Funcionarios.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
