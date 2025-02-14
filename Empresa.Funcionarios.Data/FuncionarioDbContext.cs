@@ -1,6 +1,4 @@
-﻿
-
-using Empresa.Funcionarios.Domain.Entities;
+﻿using Empresa.Funcionarios.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Empresa.Funcionarios.Data;
