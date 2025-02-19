@@ -1,6 +1,7 @@
 ﻿using Empresa.Funcionarios.Application.Services;
 using Empresa.Funcionarios.Domain.Entities;
 using Empresa.Funcionarios.Domain.Repositories;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace Empresa.Funcionarios.Tests.Services;
@@ -9,11 +10,13 @@ public class FuncionarioServiceTests
 {
     private readonly FuncionarioService _funcionarioService;
     private readonly Mock<IFuncionarioRepository> _funcionarioRepositoryMock;
+    private readonly Mock<ILogger<FuncionarioService>> _loggerMock;
 
     public FuncionarioServiceTests()
     {
         _funcionarioRepositoryMock = new Mock<IFuncionarioRepository>();
-        _funcionarioService = new FuncionarioService(_funcionarioRepositoryMock.Object);
+        _loggerMock = new Mock<ILogger<FuncionarioService>>();
+        _funcionarioService = new FuncionarioService(_funcionarioRepositoryMock.Object, _loggerMock.Object);
     }
 
     [Fact]

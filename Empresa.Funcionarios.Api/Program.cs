@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<FuncionarioDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>(); 
 builder.Services.AddScoped<FuncionarioService, FuncionarioService>();
@@ -46,7 +46,7 @@ builder.Services.AddScoped<TokenService>();
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console() // Exibir logs no console
-    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day) // Criar logs diários em arquivo
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day) // Criar logs diï¿½rios em arquivo
     .CreateLogger();
 
 builder.Host.UseSerilog();

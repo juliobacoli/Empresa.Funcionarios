@@ -2,6 +2,8 @@
 using Empresa.Funcionarios.Data.Repositories;
 using Empresa.Funcionarios.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace Empresa.Funcionarios.Tests.Repositories;
 
@@ -20,7 +22,8 @@ public class FuncionarioRepositoryTests
     public async Task AddAsync_Deve_Adicionar_Funcionario()
     {
         var context = GetDbContext();
-        var repository = new FuncionarioRepository(context);
+        var logger = new Mock<ILogger<FuncionarioRepository>>().Object;
+        var repository = new FuncionarioRepository(context, logger);
         var funcionario = new Funcionario
         {
             Id = Guid.NewGuid(),
@@ -42,7 +45,8 @@ public class FuncionarioRepositoryTests
     public async Task GetAllAsync_Deve_Retornar_Todos_Os_Funcionarios()
     {
         var context = GetDbContext();
-        var repository = new FuncionarioRepository(context);
+        var logger = new Mock<ILogger<FuncionarioRepository>>().Object;
+        var repository = new FuncionarioRepository(context, logger);
         await repository.AddAsync(new Funcionario { Id = Guid.NewGuid(), Nome = "Carlos", NumeroDocumento = "123" });
         await repository.AddAsync(new Funcionario { Id = Guid.NewGuid(), Nome = "Ana", NumeroDocumento = "456" });
 
@@ -56,7 +60,8 @@ public class FuncionarioRepositoryTests
     public async Task GetByIdAsync_Deve_Retornar_Funcionario_Se_Existir()
     {
         var context = GetDbContext();
-        var repository = new FuncionarioRepository(context);
+        var logger = new Mock<ILogger<FuncionarioRepository>>().Object;
+        var repository = new FuncionarioRepository(context, logger);
         var funcionario = new Funcionario { Id = Guid.NewGuid(), Nome = "Pedro", NumeroDocumento = "789" };
         await repository.AddAsync(funcionario);
 
@@ -70,7 +75,8 @@ public class FuncionarioRepositoryTests
     public async Task DeleteAsync_Deve_Remover_Funcionario()
     {
         var context = GetDbContext();
-        var repository = new FuncionarioRepository(context);
+        var logger = new Mock<ILogger<FuncionarioRepository>>().Object;
+        var repository = new FuncionarioRepository(context, logger);
         var funcionario = new Funcionario { Id = Guid.NewGuid(), Nome = "Lucas", NumeroDocumento = "999" };
         await repository.AddAsync(funcionario);
 
@@ -84,7 +90,8 @@ public class FuncionarioRepositoryTests
     public async Task ExistsAsync_Deve_Retornar_True_Se_Documento_Existir()
     {
         var context = GetDbContext();
-        var repository = new FuncionarioRepository(context);
+        var logger = new Mock<ILogger<FuncionarioRepository>>().Object;
+        var repository = new FuncionarioRepository(context, logger);
         var funcionario = new Funcionario { Id = Guid.NewGuid(), Nome = "Mariana", NumeroDocumento = "11122233344" };
         await repository.AddAsync(funcionario);
 
@@ -97,7 +104,8 @@ public class FuncionarioRepositoryTests
     public async Task ExistsAsync_Deve_Retornar_False_Se_Documento_Nao_Existir()
     {
         var context = GetDbContext();
-        var repository = new FuncionarioRepository(context);
+        var logger = new Mock<ILogger<FuncionarioRepository>>().Object;
+        var repository = new FuncionarioRepository(context, logger);
 
         var exists = await repository.ExistsAsync("00000000000");
 

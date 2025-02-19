@@ -17,7 +17,11 @@ public class TokenService
 
     public string GenerateToken(string userId, string email)
     {
-        var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:Secret"]);
+        var secret = _configuration["JwtSettings:Secret"];
+        if (string.IsNullOrWhiteSpace(secret))
+            throw new InvalidOperationException("JwtSettings:Secret is not configured.");
+        
+        var key = Encoding.ASCII.GetBytes(secret);
         var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId),
@@ -28,7 +32,7 @@ public class TokenService
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddHours(2),
+            Expires = DateTime.UtcNow.AddHours(8),
             Issuer = _configuration["JwtSettings:Issuer"],
             Audience = _configuration["JwtSettings:Audience"],
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
