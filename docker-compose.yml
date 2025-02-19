@@ -1,31 +1,30 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:15
-    container_name: funcionarios_postgres
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: funcionarios_sqlserver
     restart: always
     environment:
-      POSTGRES_DB: funcionariosdb
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrong!Passw0rd"  # Atenção: O SQL Server exige senha forte
     ports:
-      - "5432:5432"
+      - "1433:1433"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - sqlserver_data:/var/opt/mssql
     networks:
       - funcionarios_network
 
   api:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     container_name: funcionarios_api
     restart: always
     depends_on:
-      - postgres
+      - sqlserver
     environment:
-      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=funcionariosdb;Username=admin;Password=admin
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=funcionariosdb;User Id=sa;Password=YourStrong!Passw0rd;
     ports:
       - "5000:5000"
       - "5001:5001"
@@ -33,7 +32,7 @@ services:
       - funcionarios_network
 
 volumes:
-  postgres_data:
+  sqlserver_data:
 
 networks:
   funcionarios_network:
