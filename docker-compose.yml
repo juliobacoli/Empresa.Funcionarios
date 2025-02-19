@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -7,7 +5,7 @@ services:
     restart: always
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "YourStrong!Passw0rd"  # Atenção: O SQL Server exige senha forte
+      SA_PASSWORD: "YourStrong!Passw0rd"
     ports:
       - "1433:1433"
     volumes:
@@ -17,14 +15,14 @@ services:
 
   api:
     build:
-      context: .
+      context: ./Empresa.Funcionarios.Api
       dockerfile: Dockerfile
     container_name: funcionarios_api
     restart: always
     depends_on:
       - sqlserver
-    environment:
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=funcionariosdb;User Id=sa;Password=YourStrong!Passw0rd;
+    # environment:
+      # - ConnectionStrings__DefaultConnection=server=JULIOAVELL-PC;database=EmpresaFuncionarios;Trusted_Connection=True; TrustServerCertificate=True;
     ports:
       - "5000:5000"
       - "5001:5001"

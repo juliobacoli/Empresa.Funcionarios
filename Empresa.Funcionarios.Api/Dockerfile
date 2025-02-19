@@ -1,4 +1,3 @@
-# Usa a imagem oficial do .NET 8 como base
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 5000
@@ -10,8 +9,8 @@ WORKDIR /src
 COPY ["Empresa.Funcionarios.Api/Empresa.Funcionarios.Api.csproj", "Empresa.Funcionarios.Api/"]
 COPY ["Empresa.Funcionarios.Application/Empresa.Funcionarios.Application.csproj", "Empresa.Funcionarios.Application/"]
 COPY ["Empresa.Funcionarios.Domain/Empresa.Funcionarios.Domain.csproj", "Empresa.Funcionarios.Domain/"]
-COPY ["Empresa.Funcionarios.Data/Empresa.Funcionarios.Data.csproj", "Empresa.Funcionarios.Data/"]
-COPY ["Empresa.Funcionarios.Infrastructure/Empresa.Funcionarios.Infrastructure.csproj", "Empresa.Funcionarios.Infrastructure/"]
+COPY ./Empresa.Funcionarios.Data/Empresa.Funcionarios.Data.csproj Empresa.Funcionarios.Data/
+
 RUN dotnet restore "Empresa.Funcionarios.Api/Empresa.Funcionarios.Api.csproj"
 
 COPY . .
