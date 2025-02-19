@@ -6,6 +6,7 @@ using Empresa.Funcionarios.Domain.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
 
@@ -21,7 +22,24 @@ builder.Services.AddScoped<FuncionarioService, FuncionarioService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "Empresa.Funcionarios.Api", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new()
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Insira o token JWT. Exemplo: Bearer {seu_token}"
+    });
+    c.AddSecurityRequirement(new()
+    {
+        { new() { Reference = new() { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }, Array.Empty<string>() }
+    });
+});
+
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 
