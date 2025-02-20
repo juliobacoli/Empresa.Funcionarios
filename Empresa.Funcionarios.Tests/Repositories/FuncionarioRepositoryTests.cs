@@ -32,7 +32,7 @@ public class FuncionarioRepositoryTests
             Email = "joao@email.com",
             NumeroDocumento = "12345678900",
             DataNascimento = new DateTime(2000, 1, 1),
-            Telefones = new List<string> { "11999999999" },
+            Telefone = new List<string> { "11999999999" },
             SenhaHash = "hashed_password_example"
         };
 
@@ -57,7 +57,7 @@ public class FuncionarioRepositoryTests
             Email = "carlos@email.com",             
             NumeroDocumento = "123",
             DataNascimento = new DateTime(1993, 5, 15), 
-            Telefones = new List<string> { "11988887777" }, 
+            Telefone = new List<string> { "11988887777" }, 
             SenhaHash = "hashed_password_carlos"
         });
 
@@ -69,7 +69,7 @@ public class FuncionarioRepositoryTests
             Email = "j.silvano@email.com",
             NumeroDocumento = "123",
             DataNascimento = new DateTime(1997, 8, 26),
-            Telefones = new List<string> { "11988887777" },
+            Telefone = new List<string> { "11988887777" },
             SenhaHash = "hashed_password_silvano"
         });
 
@@ -95,7 +95,7 @@ public class FuncionarioRepositoryTests
             Email = "pedro@email.com",                      
             NumeroDocumento = "789",
             DataNascimento = new DateTime(1992, 3, 10),     
-            Telefones = new List<string> { "11966665555" }, 
+            Telefone = new List<string> { "11966665555" }, 
             SenhaHash = "hashed_password_pedro"                              
         };
 
@@ -124,7 +124,7 @@ public class FuncionarioRepositoryTests
             Email = "lucas@email.com",                      
             NumeroDocumento = "999",
             DataNascimento = new DateTime(1995, 7, 22),     
-            Telefones = new List<string> { "11955554444" }, 
+            Telefone = new List<string> { "11955554444" }, 
             SenhaHash = "hashed_password_lucas"
         };
 
@@ -151,7 +151,7 @@ public class FuncionarioRepositoryTests
             Email = "mariana@email.com",                     
             NumeroDocumento = "11122233344",
             DataNascimento = new DateTime(1993, 9, 5),       
-            Telefones = new List<string> { "11944443333" },  
+            Telefone = new List<string> { "11944443333" },  
             SenhaHash = "hashed_password_mariana"
         };
 

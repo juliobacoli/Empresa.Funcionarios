@@ -25,5 +25,10 @@ public class FuncionarioDbContext : DbContext
         modelBuilder.Entity<Funcionario>()
             .HasIndex(f => f.NumeroDocumento)
             .IsUnique();
+
+        modelBuilder.Entity<Funcionario>()
+            .Property(f => f.Id)
+            .ValueGeneratedOnAdd();
+
     }
 }

@@ -4,6 +4,7 @@ using Empresa.Funcionarios.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Empresa.Funcionarios.Data.Migrations
 {
     [DbContext(typeof(FuncionarioDbContext))]
-    partial class FuncionarioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250220204957_UpdateProps")]
+    partial class UpdateProps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

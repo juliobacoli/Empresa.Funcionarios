@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Empresa.Funcionarios.Domain.Entities;
 
 public class Funcionario
 {
-    public Guid Id { get; set; } = Guid.NewGuid();
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid Id { get; set; }
 
     [Required]
     public string Nome { get; set; }
@@ -18,7 +21,7 @@ public class Funcionario
     [Required]
     public string NumeroDocumento { get; set; }  
 
-    public List<string> Telefones { get; set; } = new List<string>();
+    public List<string> Telefone { get; set; }
 
     public Guid? GestorId { get; set; } 
 
